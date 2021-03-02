@@ -19,9 +19,9 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('browse/all', views.browse_all, name='all'),
-    path('browse/breweries', views.browse_all, name='breweries'),
-    path('browse/wineries', views.browse_all, name='wineries'),
-    path('browse/distilleries', views.browse_all, name='distilleries'),
-    path('browse/cideries', views.browse_all, name='cideries'),
+    path('browse/breweries', views.browse_breweries, name='breweries'),
+    path('browse/wineries', views.browse_wineries, name='wineries'),
+    path('browse/distilleries', views.browse_distilleries, name='distilleries'),
+    path('browse/cideries', views.browse_cideries, name='cideries'),
     path('establishment/<int:establishment_pk>', views.establishment_detail, name='establishment_detail')
 ]

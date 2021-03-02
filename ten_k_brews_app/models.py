@@ -26,7 +26,18 @@ class Establishment(models.Model):
     drinks = []
 
     def __str__(self):
-        return f'{self.name} ({self.city})'
+        if self.establishment_type == 1:
+            type_string = 'Brewery'
+        elif self.establishment_type == 2:
+            type_string = 'Winery'
+        elif self.establishment_type == 3:
+            type_string = 'Distillery'
+        elif self.establishment_type == 4:
+            type_string = 'Cidery'
+        else:
+            type_string = 'Other'
+
+        return f'{self.name} ({self.city}) -- {type_string}'
 
 
 class Drink(models.Model):

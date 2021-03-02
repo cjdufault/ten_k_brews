@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for establishment in establishments %}
+
+<div class="establishment" id="establishment_{{ establishment.pk }}">
+    <p>{{ establishment.name }}</p>
+</div>
+
+{% empty %}
+<p>Nothing found!</p>
+{% endfor %}
+
+{% endblock %}

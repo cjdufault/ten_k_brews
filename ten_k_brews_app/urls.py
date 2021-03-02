@@ -22,5 +22,6 @@ urlpatterns = [
     path('browse/breweries', views.browse_all, name='breweries'),
     path('browse/wineries', views.browse_all, name='wineries'),
     path('browse/distilleries', views.browse_all, name='distilleries'),
-    path('browse/cideries', views.browse_all, name='cideries')
+    path('browse/cideries', views.browse_all, name='cideries'),
+    path('establishment/<int:establishment_pk>', views.establishment_detail, name='establishment_detail')
 ]

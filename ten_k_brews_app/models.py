@@ -1,8 +1,7 @@
 from django.db import models
 
+
 # Create your models here.
-
-
 class Establishment(models.Model):
 
     # enum options for type of establishment, ex: Establishment.EstablishmentType.BREWERY == 1
@@ -40,6 +39,7 @@ class Drink(models.Model):
         CIDER = 4
 
     name = models.CharField(max_length=100, blank=False)
+    style = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=500, blank=True)
 
     def __str__(self):

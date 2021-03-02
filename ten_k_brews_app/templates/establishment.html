@@ -2,6 +2,16 @@
 
 {% block content %}
 
+<h1>{{ establishment.name }}</h1>
+<hr>
+
+<p>{{ establishment.type }}</p>
+<p>{{ establishment.description }}</p>
+<hr>
+
+<p>{{ establishment.address }}<br>
+{{ establishment.city }}, {{ establishment.state }}<br>
+{{ establishment.zip_code }}</p>
 
 
 {% endblock %}

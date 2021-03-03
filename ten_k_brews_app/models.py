@@ -23,8 +23,6 @@ class Establishment(models.Model):
     state = models.CharField(max_length=2, blank=False)
     zip_code = models.CharField(max_length=5, blank=False)
 
-    drinks = []
-
     def __str__(self):
         if self.establishment_type == 1:
             type_string = 'Brewery'
@@ -52,6 +50,9 @@ class Drink(models.Model):
     name = models.CharField(max_length=100, blank=False)
     style = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=500, blank=True)
+
+    # what establishment makes this drink? drinks deleted when their establishment has been deleted due to CASCADE
+    establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

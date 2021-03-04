@@ -40,7 +40,9 @@ def browse_cideries(request):
 # detail page views
 def establishment_detail(request, establishment_pk):
     establishment = Establishment.objects.get(pk=establishment_pk)
-    return render(request, 'establishment.html', {'establishment': establishment})
+    drinks = Drink.objects.filter(establishment=establishment)
+
+    return render(request, 'establishment.html', {'establishment': establishment, 'drinks': drinks})
 
 
 def drink_detail(request, drink_pk):

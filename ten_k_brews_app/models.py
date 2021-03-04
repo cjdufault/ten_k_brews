@@ -60,4 +60,9 @@ class Drink(models.Model):
     establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        string = f'{self.name} -- {self.type}'
+
+        if self.style is not None:
+            string += f' -- {self.style}'
+
+        return string

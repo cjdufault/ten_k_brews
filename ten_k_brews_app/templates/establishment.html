@@ -14,5 +14,12 @@
 <p>{{ establishment.address }}<br>
 {{ establishment.city }}, {{ establishment.state }}<br>
 {{ establishment.zip_code }}</p>
+<hr>
+
+{% for drink in drinks %}
+<div>
+    <a href="/drink/{{ drink.pk }}">{{ drink }}</a>
+</div>
+{% endfor %}
 
 {% endblock %}

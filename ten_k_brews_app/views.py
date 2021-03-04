@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Establishment
+from .models import Establishment, Drink
 
 
 # Create your views here.
@@ -7,11 +7,7 @@ def home(request):
     return render(request, 'home.html')
 
 
-def establishment_detail(request, establishment_pk):
-    establishment = Establishment.objects.get(pk=establishment_pk)
-    return render(request, 'establishment.html', {'establishment': establishment})
-
-
+# browse views
 def browse_all(request):
     establishments = Establishment.objects.all().order_by('name')
     return render(request, 'list.html', {'establishments': establishments})
@@ -39,3 +35,14 @@ def browse_cideries(request):
     establishments = \
         Establishment.objects.filter(type=Establishment.CIDERY).order_by('name')
     return render(request, 'list.html', {'establishments': establishments})
+
+
+# detail page views
+def establishment_detail(request, establishment_pk):
+    establishment = Establishment.objects.get(pk=establishment_pk)
+    return render(request, 'establishment.html', {'establishment': establishment})
+
+
+def drink_detail(request, drink_pk):
+    drink = Drink.objects.get(pk=drink_pk)
+    return render(request, 'drink.html', {'drink': drink})

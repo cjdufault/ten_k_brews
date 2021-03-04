@@ -22,7 +22,7 @@ class Establishment(models.Model):
     # descriptive variables
     name = models.CharField(max_length=50, blank=False)
     description = models.CharField(max_length=500, blank=True)
-    establishment_type = models.CharField(max_length=10, choices=ESTABLISHMENT_TYPES, blank=False)
+    type = models.CharField(max_length=10, choices=ESTABLISHMENT_TYPES, blank=False)
 
     # location variables
     address = models.CharField(max_length=100, blank=False)
@@ -31,11 +31,12 @@ class Establishment(models.Model):
     zip_code = models.CharField(max_length=5, blank=False)
 
     def __str__(self):
-        return f'{self.name} -- {self.establishment_type} -- {self.city}'
+        return f'{self.name} -- {self.type} -- {self.city}'
 
 
 class Drink(models.Model):
 
+    # choices for drink types
     BEER = 'Beer'
     WINE = 'Wine'
     LIQUOR = 'Liquor'
@@ -51,7 +52,7 @@ class Drink(models.Model):
     )
 
     name = models.CharField(max_length=100, blank=False)
-    drink_type = models.CharField(max_length=10, choices=DRINK_TYPES, blank=False)
+    type = models.CharField(max_length=10, choices=DRINK_TYPES, blank=False)
     style = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=500, blank=True)
 

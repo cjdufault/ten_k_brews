@@ -3,15 +3,16 @@
 {% block content %}
 
 <h2>{{ establishment.name }}</h2>
-<p>{{ establishment.establishment_type }}</p>
+<p>{{ establishment.type }}</p>
 <hr>
 
+{% if establishment.description %}
 <p>{{ establishment.description }}</p>
 <hr>
+{% endif %}
 
 <p>{{ establishment.address }}<br>
 {{ establishment.city }}, {{ establishment.state }}<br>
 {{ establishment.zip_code }}</p>
-
 
 {% endblock %}

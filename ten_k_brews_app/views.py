@@ -19,23 +19,23 @@ def browse_all(request):
 
 def browse_breweries(request):
     establishments = \
-        Establishment.objects.filter(establishment_type=Establishment.BREWERY).order_by('name')
+        Establishment.objects.filter(type=Establishment.BREWERY).order_by('name')
     return render(request, 'list.html', {'establishments': establishments})
 
 
 def browse_wineries(request):
     establishments = \
-        Establishment.objects.filter(establishment_type=Establishment.WINERY).order_by('name')
+        Establishment.objects.filter(type=Establishment.WINERY).order_by('name')
     return render(request, 'list.html', {'establishments': establishments})
 
 
 def browse_distilleries(request):
     establishments = \
-        Establishment.objects.filter(establishment_type=Establishment.DISTILLERY).order_by('name')
+        Establishment.objects.filter(type=Establishment.DISTILLERY).order_by('name')
     return render(request, 'list.html', {'establishments': establishments})
 
 
 def browse_cideries(request):
     establishments = \
-        Establishment.objects.filter(establishment_type=Establishment.CIDERY).order_by('name')
+        Establishment.objects.filter(type=Establishment.CIDERY).order_by('name')
     return render(request, 'list.html', {'establishments': establishments})

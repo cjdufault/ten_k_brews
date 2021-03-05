@@ -20,11 +20,8 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     # browse urls
-    path('browse/all', views.browse_all, name='all'),
-    path('browse/breweries', views.browse_breweries, name='breweries'),
-    path('browse/wineries', views.browse_wineries, name='wineries'),
-    path('browse/distilleries', views.browse_distilleries, name='distilleries'),
-    path('browse/cideries', views.browse_cideries, name='cideries'),
+    path('browse/<str:type_filter>', views.browse, name='browse'),
+    path('search/', views.search, name='search'),
 
     # detail page urls
     path('establishment/<int:establishment_pk>', views.establishment_detail, name='establishment_detail'),

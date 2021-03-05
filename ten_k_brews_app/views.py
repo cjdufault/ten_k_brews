@@ -3,16 +3,15 @@ from .models import Establishment, Drink
 from .forms import EstablishmentSearchForm, NewDrinkForm
 
 
-# Create your views here.
 def home(request):
     search_form = EstablishmentSearchForm
     return render(request, 'home.html', {'search_form': search_form})
 
 
-# browse views
 def browse(request, type_filter):
     search_form = EstablishmentSearchForm
 
+    # get establishments to list based on user selection
     if type_filter == 'all':
         establishments = Establishment.objects.all().order_by('name')
     elif type_filter == 'breweries':
@@ -24,9 +23,9 @@ def browse(request, type_filter):
     elif type_filter == 'cideries':
         establishments = Establishment.objects.filter(type=Establishment.CIDERY).order_by('name')
     else:
-        return redirect('home')
+        return redirect('home')     # redirect home if type_filter is something unexpected
 
-    return render(request, 'list.html', {'establishments': establishments, 'search_form': search_form})
+    return render(request, 'browse_pages/list.html', {'establishments': establishments, 'search_form': search_form})
 
 
 def search(request):
@@ -35,29 +34,27 @@ def search(request):
 
     if search_term:
         establishments = Establishment.objects.filter(name__icontains=search_term).order_by('name')
-        return render(request, 'list.html', {'establishments': establishments, 'search_form': search_form})
+        return render(request, 'browse_pages/list.html', {'establishments': establishments, 'search_form': search_form})
 
-    return redirect('home')
+    return redirect('browse', type_filter='all')     # show /browse/all if no search term provided
 
 
-# detail page views
 def establishment_detail(request, establishment_pk):
     search_form = EstablishmentSearchForm
 
     establishment = get_object_or_404(Establishment, pk=establishment_pk)
     drinks = Drink.objects.filter(establishment=establishment).order_by('name')
 
-    return render(request, 'establishment.html',
+    return render(request, 'detail_pages/establishment.html',
                   {'establishment': establishment, 'drinks': drinks, 'search_form': search_form})
 
 
 def drink_detail(request, drink_pk):
     search_form = EstablishmentSearchForm
     drink = get_object_or_404(Drink, pk=drink_pk)
-    return render(request, 'drink.html', {'drink': drink, 'search_form': search_form})
+    return render(request, 'detail_pages/drink.html', {'drink': drink, 'search_form': search_form})
 
 
-# forms
 def new_drink_form(request, establishment_pk):
     search_form = EstablishmentSearchForm
     establishment = get_object_or_404(Establishment, pk=establishment_pk)
@@ -76,4 +73,4 @@ def new_drink_form(request, establishment_pk):
     else:
         form = NewDrinkForm()
 
-    return render(request, 'new_drink.html', {'form': form, 'establishment': establishment, 'search_form': search_form})
+    return render(request, 'form_pages/new_drink.html', {'form': form, 'establishment': establishment, 'search_form': search_form})

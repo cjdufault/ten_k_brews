@@ -1,3 +1,4 @@
+{% url 'logout' as logout_url %}
 <html>
 <head>
     <title>10,000 Brews</title>
@@ -12,6 +13,23 @@
 <a href="{% url 'browse' type_filter='wineries' %}">Wineries</a>
 <a href="{% url 'browse' type_filter='distilleries' %}">Distilleries</a>
 <a href="{% url 'browse' type_filter='cideries' %}">Cideries</a>
+
+{% if user.is_authenticated %}
+    <span id='welcome-user-msg'>You are logged in, <a href="{% url 'my_user_profile' %}">{{ user.username }}</a>.  <a href="{% url 'logout' %}">Logout</a></span>
+
+{% else %}
+
+  {% if request.path != logout_url %}
+
+    <span id='login-or-sign-up'><a href="{% url 'login' %}?next={{ request.path }}">Login or sign up</a></span>
+
+  {% else %}
+
+    <span id='login-or-sign-up'><a href="{% url 'login' %}?next={% url 'home' %}">Login or sign up</a></span>
+
+  {% endif %}
+
+{% endif %}
 
 <form id="search-bar" method="GET" action="{% url 'search' %}">
     {{ search_form }}

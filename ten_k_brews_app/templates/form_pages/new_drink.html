@@ -7,7 +7,7 @@
 <form method="POST" action="{% url 'new_drink_form' establishment_pk=establishment.pk %}" enctype="multipart/form-data">
     <div>
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ drink_form.as_p }}
     </div>
     <input type="submit" value="Add Drink">
 </form>

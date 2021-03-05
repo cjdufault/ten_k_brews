@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ drink.name }}</h2>
+<p>{{ drink.type }} -- <a href="{% url 'establishment_detail' establishment_pk=drink.establishment.pk %}"> {{ drink.establishment.name }}</a></p>
+<hr>
+
+{% if drink.style or drink.description %}
+<p>{{ drink.style }}</p>
+<p>{{ drink.description }}</p>
+<hr>
+{% endif %}
+
+{% endblock %}

@@ -5,7 +5,7 @@
 {% for establishment in establishments %}
 
 <div class="establishment" id="establishment_{{ establishment.pk }}">
-    <p>{{ establishment }}</p>
+    <a href="{% url 'establishment_detail' establishment_pk=establishment.pk %}">{{ establishment }}</a>
 </div>
 
 {% empty %}

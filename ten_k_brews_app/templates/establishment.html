@@ -3,15 +3,25 @@
 {% block content %}
 
 <h2>{{ establishment.name }}</h2>
+<p>{{ establishment.type }}</p>
 <hr>
 
-<p>{{ establishment.type }}</p>
+{% if establishment.description %}
 <p>{{ establishment.description }}</p>
 <hr>
+{% endif %}
 
 <p>{{ establishment.address }}<br>
 {{ establishment.city }}, {{ establishment.state }}<br>
 {{ establishment.zip_code }}</p>
+<hr>
 
+{% for drink in drinks %}
+<div>
+    <a href="{% url 'drink_detail' drink_pk=drink.pk %}">{{ drink }}</a>
+</div>
+{% endfor %}
+
+<a href="{% url 'new_drink_form' establishment_pk=establishment.pk %}">Add a Drink</a>
 
 {% endblock %}

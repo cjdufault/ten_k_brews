@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Add a new drink from {{ establishment.name }}</h2>
+
+<form method="POST" action="{% url 'new_drink_form' establishment_pk=establishment.pk %}" enctype="multipart/form-data">
+    <div>
+        {% csrf_token %}
+        {{ form.as_p }}
+    </div>
+    <input type="submit" value="Add Drink">
+</form>
+
+{% endblock %}

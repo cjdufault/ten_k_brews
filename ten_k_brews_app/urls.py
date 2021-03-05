@@ -28,5 +28,8 @@ urlpatterns = [
 
     # detail page urls
     path('establishment/<int:establishment_pk>', views.establishment_detail, name='establishment_detail'),
-    path('drink/<int:drink_pk>', views.drink_detail, name='drink_detail')
+    path('drink/<int:drink_pk>', views.drink_detail, name='drink_detail'),
+
+    # form urls
+    path('new_drink/<int:establishment_pk>', views.new_drink_form, name='new_drink_form')
 ]

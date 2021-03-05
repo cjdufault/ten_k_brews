@@ -18,8 +18,10 @@
 
 {% for drink in drinks %}
 <div>
-    <a href="/drink/{{ drink.pk }}">{{ drink }}</a>
+    <a href="{% url 'drink_detail' drink_pk=drink.pk %}">{{ drink }}</a>
 </div>
 {% endfor %}
+
+<a href="{% url 'new_drink_form' establishment_pk=establishment.pk %}">Add a Drink</a>
 
 {% endblock %}

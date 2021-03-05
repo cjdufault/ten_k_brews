@@ -33,8 +33,11 @@ def search(request):
     search_form = EstablishmentSearchForm
     search_term = request.GET.get('search_term')
 
-    establishments = Establishment.objects.filter(name__icontains=search_term).order_by('name')
-    return render(request, 'list.html', {'establishments': establishments, 'search_form': search_form})
+    if search_term:
+        establishments = Establishment.objects.filter(name__icontains=search_term).order_by('name')
+        return render(request, 'list.html', {'establishments': establishments, 'search_form': search_form})
+
+    return redirect('home')
 
 
 # detail page views

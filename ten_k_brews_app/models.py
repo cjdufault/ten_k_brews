@@ -21,7 +21,7 @@ class Establishment(models.Model):
 
     # descriptive variables
     name = models.CharField(max_length=50, blank=False)
-    description = models.CharField(max_length=500, blank=True)
+    description = models.TextField(max_length=10000, blank=True)
     type = models.CharField(max_length=10, choices=ESTABLISHMENT_TYPES, blank=False)
 
     # location variables
@@ -54,7 +54,7 @@ class Drink(models.Model):
     name = models.CharField(max_length=100, blank=False)
     type = models.CharField(max_length=10, choices=DRINK_TYPES, blank=False)
     style = models.CharField(max_length=100, blank=True)
-    description = models.CharField(max_length=500, blank=True)
+    description = models.TextField(max_length=10000, blank=True)
 
     # what establishment makes this drink? drinks deleted when their establishment has been deleted due to CASCADE
     establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)

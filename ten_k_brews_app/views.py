@@ -45,7 +45,7 @@ def establishment_detail(request, establishment_pk):
     search_form = EstablishmentSearchForm
 
     establishment = get_object_or_404(Establishment, pk=establishment_pk)
-    drinks = Drink.objects.filter(establishment=establishment)
+    drinks = Drink.objects.filter(establishment=establishment).order_by('name')
 
     return render(request, 'establishment.html',
                   {'establishment': establishment, 'drinks': drinks, 'search_form': search_form})
@@ -77,4 +77,3 @@ def new_drink_form(request, establishment_pk):
         form = NewDrinkForm()
 
     return render(request, 'new_drink.html', {'form': form, 'establishment': establishment, 'search_form': search_form})
-

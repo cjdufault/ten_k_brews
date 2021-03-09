@@ -32,9 +32,7 @@ urlpatterns = [
     path('new_drink/<int:establishment_pk>', views.new_drink_form, name='new_drink_form'),
 
     # account urls
-    # TODO: replace views.home in user urls with proper views
-    path('user/profile/<int:user_pk>/', views.user_profile, name='user_profile'),
-    path('user/profile/', views.my_user_profile, name='my_user_profile'),
+    path('user/profile/<str:username>/', views.user_profile, name='user_profile'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='account_pages/login.html'), name='login'),
     path('accounts/logout/', views.logout_user, name='logout'),
     path('register/', views.register, name='register')

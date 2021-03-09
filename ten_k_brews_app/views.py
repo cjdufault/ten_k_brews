@@ -2,18 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from .models import Establishment, Drink
 from .forms import EstablishmentSearchForm, NewDrinkForm, UserRegistrationForm
 
+search_form = EstablishmentSearchForm
+
 
 def home(request):
-    search_form = EstablishmentSearchForm
     return render(request, 'home.html', {'search_form': search_form})
 
 
 def browse(request, type_filter):
-    search_form = EstablishmentSearchForm
-
     # get establishments to list based on user selection
     if type_filter == 'all':
         establishments = Establishment.objects.all().order_by('name')
@@ -32,7 +32,6 @@ def browse(request, type_filter):
 
 
 def search(request):
-    search_form = EstablishmentSearchForm
     search_term = request.GET.get('search_term')
 
     if search_term:
@@ -43,8 +42,6 @@ def search(request):
 
 
 def establishment_detail(request, establishment_pk):
-    search_form = EstablishmentSearchForm
-
     establishment = get_object_or_404(Establishment, pk=establishment_pk)
     drinks = Drink.objects.filter(establishment=establishment).order_by('name')
 
@@ -53,14 +50,12 @@ def establishment_detail(request, establishment_pk):
 
 
 def drink_detail(request, drink_pk):
-    search_form = EstablishmentSearchForm
     drink = get_object_or_404(Drink, pk=drink_pk)
     return render(request, 'detail_pages/drink.html', {'drink': drink, 'search_form': search_form})
 
 
 @login_required
 def new_drink_form(request, establishment_pk):
-    search_form = EstablishmentSearchForm
     establishment = get_object_or_404(Establishment, pk=establishment_pk)
 
     # receive new Drink data from form
@@ -82,17 +77,12 @@ def new_drink_form(request, establishment_pk):
                   {'drink_form': drink_form, 'establishment': establishment, 'search_form': search_form})
 
 
-def user_profile(request):
-    return
-
-
-def my_user_profile(request):
-    return
+def user_profile(request, username):
+    user = User.objects.get_by_natural_key(username)
+    return render(request, 'account_pages/user_profile.html', {'user': user, 'search_form': search_form})
 
 
 def register(request):
-    search_form = EstablishmentSearchForm
-
     if request.method == 'POST':
         registration_form = UserRegistrationForm(request.POST)
         if registration_form.is_valid():
@@ -115,8 +105,6 @@ def register(request):
 
 
 def logout_user(request):
-    search_form = EstablishmentSearchForm
-
     username = request.user.username
     logout(request)
     return render(request, 'account_pages/logout.html', {'username': username, 'search_form': search_form})

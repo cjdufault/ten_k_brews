@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.validators import validate_comma_separated_integer_list
 
 
 # Create your models here.
@@ -23,6 +25,7 @@ class Establishment(models.Model):
     name = models.CharField(max_length=50, blank=False)
     description = models.TextField(max_length=10000, blank=True)
     type = models.CharField(max_length=10, choices=ESTABLISHMENT_TYPES, blank=False)
+    users_visited = models.ManyToManyField(User)    # all users who have visited here
 
     # location variables
     address = models.CharField(max_length=100, blank=False)
@@ -56,8 +59,12 @@ class Drink(models.Model):
     style = models.CharField(max_length=100, blank=True)
     description = models.TextField(max_length=10000, blank=True)
 
+    # foreign keys
     # what establishment makes this drink? drinks deleted when their establishment has been deleted due to CASCADE
     establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)
+
+    # user that uploaded this drink; will be set to None if User is deleted
+    user = models.ForeignKey(User, default=None, on_delete=models.SET_DEFAULT)
 
     def __str__(self):
         string = f'{self.name} -- {self.type}'

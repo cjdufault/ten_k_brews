@@ -3,7 +3,22 @@
 
 <h2>{{ user.username }}</h2>
 
-{% block my_user_content %}
-{% endblock %}
+<h3>Places visited:</h3>
+{% for establishment in places_visited %}
+    <div>
+        <a href="{% url 'establishment_detail' establishment_pk=establishment.pk %}">{{ establishment }}</a>
+    </div>
+{% empty %}
+    <div>{{ user.username }} hasn't visited anywhere yet!</div>
+{% endfor %}
+
+<h3>Drinks Added:</h3>
+{% for drink in drinks_added %}
+    <div>
+        <a href="{% url 'drink_detail' drink_pk=drink.pk %}">{{ drink }} -- {{ drink.establishment }}</a>
+    </div>
+{% empty %}
+    <div>{{ user.username }} hasn't added any drinks yet!</div>
+{% endfor %}
 
 {% endblock %}

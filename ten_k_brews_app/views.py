@@ -79,7 +79,11 @@ def new_drink_form(request, establishment_pk):
 
 def user_profile(request, username):
     user = User.objects.get_by_natural_key(username)
-    return render(request, 'account_pages/user_profile.html', {'user': user, 'search_form': search_form})
+    places_visited = Establishment.objects.filter(users_visited__username=user.username).order_by('name')
+    drinks_added = Drink.objects.filter(user=user)
+    return render(request, 'account_pages/user_profile.html',
+                  {'user': user, 'search_form': search_form,
+                   'places_visited': places_visited, 'drinks_added': drinks_added})
 
 
 def register(request):

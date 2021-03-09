@@ -59,6 +59,7 @@ def drink_detail(request, drink_pk):
     return render(request, 'detail_pages/drink.html', {'drink': drink, 'search_form': search_form})
 
 
+@login_required
 def new_drink_form(request, establishment_pk):
     search_form = EstablishmentSearchForm
     establishment = get_object_or_404(Establishment, pk=establishment_pk)
@@ -70,6 +71,7 @@ def new_drink_form(request, establishment_pk):
         if drink_form.is_valid():
             drink = drink_form.save(commit=False)
             drink.establishment = establishment
+            drink.user = request.user
             drink.save()
             return redirect('drink_detail', drink_pk=drink.pk)
 

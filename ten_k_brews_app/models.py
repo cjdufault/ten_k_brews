@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import validate_comma_separated_integer_list
 
 
 # Create your models here.
@@ -64,7 +63,7 @@ class Drink(models.Model):
     establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)
 
     # user that uploaded this drink; will be set to None if User is deleted
-    user = models.ForeignKey(User, default=None, on_delete=models.SET_DEFAULT)
+    user = models.ForeignKey(User, default=None, on_delete=models.SET_DEFAULT, blank=True)
 
     def __str__(self):
         string = f'{self.name} -- {self.type}'
